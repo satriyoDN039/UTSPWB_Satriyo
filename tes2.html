@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ 
+    <title>Membuat Input Data Dengan Javascript Tanpa Database</title>
+ 
+    
+  </head>
+
+    <script type="text/javascript">  
+		function getData(){  
+			var kode_pendaftaran =document.getElementById("kode_pendaftaran").value;
+			var nama = document.getElementById("nama").value;
+			var hasil_test_awal = document.getElementById("hasil_test_awal").value;
+			var jumlah_peserta = document.getElementById("jumlah_peserta").value;
+			var jumlah_pertemuan = document.getElementById("jumlah_pertemuan").value;
+			var kelas = document.getElementById("kelas").value;
+			var no_urut = kode_pendaftaran.substring(4, 7);
+
+
+
+			//mengambil data Jenis Kursus
+			var jenis_kursus = kode_pendaftaran.substring(0, 2);
+			if (jenis_kursus == "VB") {
+				var kelas = "Visual Basic";
+				var biaya_kursus = 750000;
+			} else if (jenis_kursus == "DP") {
+				var kelas = "Delphi";
+				var biaya_kursus = 650000;
+			} else {
+				var kelas = "Linux";
+				var biaya_kursus = 800000;
+			}
+
+			//mengambil Kode Hari
+			var kode_hari = kode_pendaftaran.substring(3, 4);
+			if (kode_hari == "K") {
+				var hari = "Kamis";
+			} else if (kode_hari == "J") {
+				var hari = "Jum'at";
+			} else {
+				var hari = "Minggu";
+			}
+
+			//mengambil  Biaya Tambahan
+			if (kelas == "private") {
+				if (jumlah_peserta > 5) {
+					var biaya_tambahan = 75000 * jumlah_peserta;
+				} else {
+					var biaya_tambahan = 200000 * jumlah_peserta;
+				}
+			} else {
+				if (jumlah_peserta < 10) {
+					var biaya_tambahan = 50000 * jumlah_peserta;
+				} else {
+					var biaya_tambahan = 0;
+				}
+			}
+			
+			//mengambil Biaya Subsidi
+			if (hasil_test_awal == "grade A") {
+				var biaya_subsidi = biaya_kursus * (5 / 100);
+			} else if (hasil_test_awal == "grade B") {
+				var biaya_subsidi = biaya_kursus * (2 / 100);
+			} else {
+				var biaya_subsidi = 0;
+			}
+
+			var biaya_yang_dibayar = biaya_subsidi + biaya_tambahan + biaya_kursus;
+
+			document.getElementById('out_kode_pendafataran').innerHTML = kode_pendaftaran;
+			document.getElementById('out_nama').innerHTML = nama;
+			document.getElementById('out_jenis_kursus').innerHTML = jenis_kursus;
+			document.getElementById('out_kelas').innerHTML = kelas;
+			document.getElementById('out_no_urut').innerHTML = no_urut;
+			document.getElementById('out_hasil_test_awal').innerHTML = hasil_test_awal;
+			document.getElementById('out_hari').innerHTML = hari;
+			document.getElementById('out_jumlah_peserta').innerHTML = jumlah_peserta;
+			document.getElementById('out_jumlah_pertemuan').innerHTML = jumlah_pertemuan;
+			document.getElementById('out_biaya_kursus').innerHTML = biaya_kursus;
+			document.getElementById('out_biaya_tambahan').innerHTML = biaya_tambahan;
+			document.getElementById('out_biaya_subsidi').innerHTML = biaya_subsidi;
+			document.getElementById('out_biaya_dibayar').innerHTML = biaya_yang_dibayar;
+		}  
+	</script>
+
+
+
+
+<body>
+  <div class="container"></div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8"><h1>Nusantara Computer Center</h1>
+          <form actio="post" method="" action="">
+        <div align="center">
+          <div class="form-group">
+            <table>
+                <tr> <div class="form-group">
+                    <td><label for="exampleFormControlInput1">Nama</label></td>
+                  
+                    <td>  <input type="text" class="form-control" name="nama" id="nama" placeholder="isi nama asli...."></td>
+                  </div>
+                  </tr>
+                <tr>
+                  <div class="form-group">
+                    <td><label for="exampleFormControlSelect1">Kode Pendaftaran</label></td>
+                    
+                    <td>
+                        <select class="form-control" name="kode_pendaftaran" id="kode_pendaftaran">
+                            <option value="">    </option>
+                            <option value="VBSK00108">VBSK00108</option>
+                            <option value="DPSJ00210">DPSJ00210</option>
+                            <option value="LXSM10105">LXSM10105</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>kelas</td>
+                    
+                    <td>
+                        <select class="form-control"name="kelas" id="kelas">
+                            <option value="">   </option>
+                            <option value="regular">Regular</option>
+                            <option value="private">Private</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="exampleFormControlSelect1">Jumlah Pertemuan</label></td>
+                    
+                    <td><input class="form-control" type="number" name="jumlah_pertemuan" id="jumlah_pertemuan"></td>
+                </tr>
+                <tr>
+                    <td><label for="exampleFormControlSelect1">Jumlah Peserta</label></td>
+                    
+                    <td><input class="form-control" type="number" name="jumlah_peserta" id="jumlah_peserta"></td>
+                </tr>
+                <tr>
+                    <td><label for="exampleFormControlSelect1">Hasil Test Awal</label></td>
+                    <td>
+                        <select input class="form-control" name="hasil_test_awal" id="hasil_test_awal">
+                        <option value=""></option>
+                        <option value="grade A">Grade A</option>
+                        <option value="grade B">Grade B</option>
+                        <option value="grade C">Grade C</option>
+                    </select>
+                </td>
+                </tr>
+            </table>
+            <div class="form-group">
+              <button type="button" value="Simpan" onClick="getData()" class="btn btn-success">Simpan</button>
+              <button type="reset" class="btn btn-warning">Batal</button>
+            </div>
+        </div>
+        </div>
+      
+        <br>
+        <div class="col-md-8"><h1>Nusantara Computer Center</h1>
+          <div class="form-group"></div>
+            <h3><b>Kode Pendaftaran</b> <label id="out_kode_pendafataran"></label></h3>
+            <div class="form-group"></div>
+            <table>
+                <tr>
+					<td>Nama</td>
+					<td>:</td>
+					<td><label id="out_nama"></label></td>
+
+					<td>Jenis Kursus</td>
+					<td>:</td>
+					<td><label id="out_jenis_kursus"></label></td>
+				</tr>
+				<tr>
+					<td>Kelas</td>
+					<td>:</td>
+					<td><label id="out_kelas"></label></td>
+
+					<td>No Urut</td>
+					<td>:</td>
+					<td><label id="out_no_urut"></label></td>
+				</tr>
+				<tr>
+					<td>Hasil Test Awal</td>
+					<td>:</td>
+					<td><label id="out_hasil_test_awal"></label></td>
+
+					<td>Hari</td>
+					<td>:</td>
+					<td><label id="out_hari"></label></td>
+				</tr>
+				<tr>
+					<td>Jumlah Peserta</td>
+					<td>:</td>
+					<td><label id="out_jumlah_peserta"></label> Orang</td>
+
+					<td>Jumlah Pertemuan</td>
+					<td>:</td>
+					<td><label id="out_jumlah_pertemuan"></label> Kali</td>
+				</tr>
+				<tr>
+					<td>Biaya Kursus</td>
+					<td>:</td>
+					<td><label id="out_biaya_kursus"></label></td>
+
+					<td>Biaya Tambahan</td>
+					<td>:</td>
+					<td><label id="out_biaya_tambahan"></label></td>
+				</tr>
+				<tr>
+					<td>Biaya Subsidi</td>
+					<td>:</td>
+					<td><label id="out_biaya_subsidi"></label></td>
+
+					<td>Biaya Yang Dibayar</td>
+					<td>:</td>
+					<td><label id="out_biaya_dibayar"></label></td>
+				</tr>
+            </table>
+        </div>
+    </form>
+
+</body>
+</html>
